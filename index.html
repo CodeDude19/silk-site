@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An interactive journey from silk moth to finished silk fabric."
+    />
+    <title>The Story of Silk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=Manrope:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,500;1,500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <svg class="cursor-trail" aria-hidden="true">
+      <path id="cursorTrailPath"></path>
+    </svg>
+    <div class="cursor" aria-hidden="true"><span></span></div>
+
+    <header class="topbar">
+      <a class="brand" href="#story" aria-label="The Story of Silk, back to start">
+        <svg viewBox="0 0 44 24" aria-hidden="true">
+          <path class="brand-wing left" d="M21 12C14 1 3 3 4 12c1 7 10 5 17 0Z" />
+          <path class="brand-wing right" d="M23 12C30 1 41 3 40 12c-1 7-10 5-17 0Z" />
+          <path d="M22 7v11" />
+        </svg>
+        <span>The Story of Silk</span>
+      </a>
+
+      <div class="chapter-readout" aria-live="polite">
+        <span id="chapterNumber">01</span>
+        <span class="chapter-line"></span>
+        <span id="chapterName">The moth</span>
+      </div>
+    </header>
+
+    <main id="story" class="story">
+      <div class="stage">
+        <div class="ambient-orb orb-one" aria-hidden="true"></div>
+        <div class="ambient-orb orb-two" aria-hidden="true"></div>
+
+        <section class="copy" aria-live="polite">
+          <p class="eyebrow" id="eyebrow">Where silk begins</p>
+          <div class="titles" id="titles">
+            <h1 class="title is-visible" data-index="0">
+              This is where<br /><em>silk begins.</em>
+            </h1>
+            <h2 class="title" data-index="1">
+              Tiny eggs rest<br /><em>on mulberry leaves.</em>
+            </h2>
+            <h2 class="title" data-index="2">
+              The silkworm eats.<br /><em>And grows.</em>
+            </h2>
+            <h2 class="title" data-index="3">
+              One long thread<br /><em>becomes a cocoon.</em>
+            </h2>
+            <h2 class="title" data-index="4">
+              The cocoon opens.<br /><em>Silk is found.</em>
+            </h2>
+            <h2 class="title" data-index="5">
+              Each thread<br /><em>takes on colour.</em>
+            </h2>
+            <h2 class="title" data-index="6">
+              Warp meets weft.<br /><em>Cloth takes shape.</em>
+            </h2>
+            <h2 class="title" data-index="7">
+              From a small cocoon<br /><em>comes silk.</em>
+            </h2>
+          </div>
+          <p class="description" id="description">
+            The journey begins with a small silk moth.
+          </p>
+          <p class="opening-scroll"><i></i><span>Scroll to follow the story</span></p>
+        </section>
+
+        <div class="visual-wrap" aria-hidden="true">
+          <svg
+            id="silkVisual"
+            class="silk-visual"
+            viewBox="0 0 900 760"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="moonGlow" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#FFF8DC" />
+                <stop offset="1" stop-color="#D9BC72" />
+              </linearGradient>
+              <linearGradient id="wingGold" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#FFFBE6" />
+                <stop offset=".38" stop-color="#EAD9AA" />
+                <stop offset=".72" stop-color="#B99B65" />
+                <stop offset="1" stop-color="#72542D" />
+              </linearGradient>
+              <radialGradient id="wingPearl" cx=".35" cy=".35" r=".8">
+                <stop stop-color="#FFFDF0" stop-opacity=".92" />
+                <stop offset=".5" stop-color="#E5D4A8" stop-opacity=".74" />
+                <stop offset="1" stop-color="#8D7042" stop-opacity=".88" />
+              </radialGradient>
+              <linearGradient id="mothFur" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#FFF6D6" />
+                <stop offset=".5" stop-color="#BDA77B" />
+                <stop offset="1" stop-color="#5E4528" />
+              </linearGradient>
+              <linearGradient id="leafGreen" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#A4B879" />
+                <stop offset="1" stop-color="#405934" />
+              </linearGradient>
+              <linearGradient id="cocoonGold" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#FFF2C5" />
+                <stop offset=".45" stop-color="#DAB96C" />
+                <stop offset="1" stop-color="#9B6D2D" />
+              </linearGradient>
+              <linearGradient id="fabricGold" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#E6C26D" />
+                <stop offset=".3" stop-color="#FFF0B2" />
+                <stop offset=".52" stop-color="#A8762E" />
+                <stop offset=".72" stop-color="#F5D88A" />
+                <stop offset="1" stop-color="#77501D" />
+              </linearGradient>
+              <pattern id="silkWeave" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M0 2.5h10M0 7.5h10" stroke="#FFF5CA" stroke-width=".8" opacity=".24" />
+                <path d="M2.5 0v10M7.5 0v10" stroke="#68421E" stroke-width=".7" opacity=".2" />
+                <path d="M0 0l10 10M10 0L0 10" stroke="#FFF9DD" stroke-width=".3" opacity=".1" />
+              </pattern>
+              <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="18" />
+              </filter>
+              <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#06130E" flood-opacity=".36" />
+              </filter>
+              <filter id="mothTexture" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency=".018 .07" numOctaves="2" seed="8" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" xChannelSelector="R" yChannelSelector="G" />
+                <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#020B07" flood-opacity=".35" />
+              </filter>
+              <filter id="hotGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="8" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <clipPath id="fabricClip">
+                <path d="M230 246C395 206 560 210 722 250v302c-167-37-330-38-492 0V246Z" />
+              </clipPath>
+            </defs>
+
+            <g class="stars" id="stars"></g>
+            <g class="transformation-field">
+              <circle class="transition-bloom" id="transitionBloom" cx="470" cy="420" r="90" />
+              <circle class="transition-ring" id="transitionRing" cx="470" cy="420" r="70" />
+              <path
+                class="metamorph-path"
+                id="metamorphPath"
+                d="M360 480C480 150 760 200 700 450"
+              />
+              <g class="metamorph-particles" id="metamorphParticles"></g>
+            </g>
+            <circle class="moon-halo" cx="516" cy="323" r="210" fill="#C8A75D" opacity=".08" filter="url(#softGlow)" />
+            <circle class="moon" cx="516" cy="323" r="144" fill="url(#moonGlow)" opacity=".88" />
+            <circle class="moon-crater" cx="474" cy="276" r="24" />
+            <circle class="moon-crater" cx="554" cy="356" r="38" />
+            <circle class="moon-crater" cx="580" cy="250" r="14" />
+
+            <g class="branch-scene">
+              <path class="branch" d="M116 650C249 618 323 550 392 456C422 415 451 379 486 358" />
+              <path class="twig" d="M267 581C230 522 195 499 154 489" />
+              <path class="twig" d="M348 511C392 503 432 479 468 436" />
+              <g class="leaf leaf-a" transform="translate(169 482) rotate(-25)">
+                <path d="M0 8C27-38 85-48 108-8C80 35 33 43 0 8Z" fill="url(#leafGreen)" />
+                <path d="M7 7C41 2 66-8 99-24M42 1l8-24M67-9l18 14" />
+              </g>
+              <g class="leaf leaf-b" transform="translate(384 471) rotate(-13) scale(.8)">
+                <path d="M0 8C27-38 85-48 108-8C80 35 33 43 0 8Z" fill="url(#leafGreen)" />
+                <path d="M7 7C41 2 66-8 99-24M42 1l8-24M67-9l18 14" />
+              </g>
+              <g class="leaf leaf-c" transform="translate(112 565) rotate(20) scale(.7)">
+                <path d="M0 8C27-38 85-48 108-8C80 35 33 43 0 8Z" fill="url(#leafGreen)" />
+                <path d="M7 7C41 2 66-8 99-24M42 1l8-24M67-9l18 14" />
+              </g>
+            </g>
+
+            <path
+              id="flightPath"
+              class="flight-path"
+              d="M610 375C715 284 816 342 748 430C689 506 542 409 471 488"
+            />
+
+            <g class="moth" id="moth" transform="translate(610 375)" filter="url(#mothTexture)">
+              <g class="moth-wing moth-wing-left">
+                <path class="hind-wing" d="M-8 8C-70 1-141 24-154 76C-121 112-55 94-7 32Z" fill="url(#wingPearl)" />
+                <path class="fore-wing" d="M-5 8C-43-79-131-125-181-75C-183-16-104 37-7 30Z" fill="url(#wingGold)" />
+                <g class="wing-veins">
+                  <path d="M-9 18C-55-2-104-30-165-69M-23 20C-68 22-113 46-145 75M-44 7C-75-20-87-62-89-93M-76-10C-113-5-139-20-167-49M-69 34C-94 62-117 76-142 80" />
+                  <path class="wing-mark" d="M-119-60c23-10 46 1 54 25c-25 12-48 0-54-25Z" />
+                </g>
+              </g>
+              <g class="moth-wing moth-wing-right">
+                <path class="hind-wing" d="M8 8C70 1 141 24 154 76C121 112 55 94 7 32Z" fill="url(#wingPearl)" />
+                <path class="fore-wing" d="M5 8C43-79 131-125 181-75C183-16 104 37 7 30Z" fill="url(#wingGold)" />
+                <g class="wing-veins">
+                  <path d="M9 18C55-2 104-30 165-69M23 20C68 22 113 46 145 75M44 7C75-20 87-62 89-93M76-10C113-5 139-20 167-49M69 34C94 62 117 76 142 80" />
+                  <path class="wing-mark" d="M119-60c-23-10-46 1-54 25c25 12 48 0 54-25Z" />
+                </g>
+              </g>
+              <g class="moth-body-group">
+                <ellipse class="moth-thorax" cx="0" cy="4" rx="24" ry="31" />
+                <path class="moth-body" d="M0 24C18 39 13 91 0 112C-13 91-18 39 0 24Z" />
+                <path class="body-rings" d="M-11 47h22M-13 66h26M-10 85h20" />
+                <circle class="moth-head" cx="0" cy="-24" r="17" />
+                <circle class="moth-eye left" cx="-8" cy="-27" r="3" />
+                <circle class="moth-eye right" cx="8" cy="-27" r="3" />
+                <path class="antenna" d="M-7-36C-24-77-68-86-85-60M7-36C24-77 68-86 85-60" />
+                <path class="antenna-feathers" d="M-24-61l-19-5M-32-70l-14-12M-43-76l-8-13M24-61l19-5M32-70l14-12M43-76l8-13" />
+              </g>
+            </g>
+
+            <g class="egg-scene" id="eggScene">
+              <g class="egg-leaf" transform="translate(284 410) rotate(8)">
+                <path d="M0 38C73-80 241-103 324 9C244 111 95 117 0 38Z" fill="url(#leafGreen)" />
+                <path d="M15 35C111 27 198-9 303-57M113 16L88-43M181-6l38 48M240-32l-1-37" />
+              </g>
+              <g class="eggs" id="eggs">
+                <circle cx="427" cy="395" r="15" />
+                <circle cx="459" cy="402" r="14" />
+                <circle cx="492" cy="398" r="15" />
+                <circle cx="444" cy="429" r="14" />
+                <circle cx="478" cy="432" r="15" />
+                <circle cx="511" cy="424" r="13" />
+                <circle cx="463" cy="458" r="13" />
+                <circle cx="497" cy="455" r="14" />
+              </g>
+              <g class="egg-cracks">
+                <path d="M421 387l7 7l-6 8M453 394l7 7l-5 8M486 389l8 8l-6 9M438 421l7 7l-5 8M473 424l7 8l-6 8M505 416l7 7l-6 8M457 449l7 7l-5 7M491 447l7 7l-6 7" />
+              </g>
+            </g>
+
+            <g class="worm-scene" id="wormScene">
+              <path class="worm-leaf" d="M207 488C282 305 518 251 701 373C617 582 367 622 207 488Z" fill="url(#leafGreen)" />
+              <path class="leaf-vein" d="M235 480C390 446 503 389 662 342M367 448l-50-79M456 410l53 91M554 371l-11-64" />
+              <path class="bite bite-one" d="M631 344a28 28 0 1 1 39 39" />
+              <path class="bite bite-two" d="M674 373a28 28 0 1 1 25 44" />
+              <g class="worm" id="worm" filter="url(#shadow)">
+                <ellipse cx="361" cy="392" rx="42" ry="44" />
+                <ellipse cx="404" cy="403" rx="43" ry="45" />
+                <ellipse cx="448" cy="408" rx="44" ry="46" />
+                <ellipse cx="493" cy="402" rx="43" ry="45" />
+                <ellipse cx="535" cy="383" rx="42" ry="44" />
+                <circle class="worm-head" cx="574" cy="353" r="48" />
+                <circle class="worm-eye" cx="589" cy="342" r="5" />
+                <path class="worm-smile" d="M590 365c9 4 17 1 21-7" />
+                <path class="worm-ridges" d="M374 361v62M416 368v65M460 373v67M504 365v62M544 344l20 70" />
+                <g class="worm-spots">
+                  <circle cx="376" cy="389" r="4" /><circle cx="418" cy="397" r="4" />
+                  <circle cx="462" cy="403" r="4" /><circle cx="506" cy="394" r="4" />
+                </g>
+                <path class="worm-leg" d="M390 434v18M436 439v18M483 433v18M525 414v16" />
+              </g>
+            </g>
+
+            <g class="cocoon-scene" id="cocoonScene">
+              <path class="cocoon-twig" d="M218 215C393 246 560 221 724 161" />
+              <path class="hanger" d="M504 228C502 267 498 291 487 318" />
+              <ellipse class="cocoon-glow" cx="479" cy="422" rx="156" ry="190" fill="#E8C773" opacity=".14" filter="url(#softGlow)" />
+              <ellipse class="cocoon-base" cx="479" cy="422" rx="103" ry="142" fill="url(#cocoonGold)" filter="url(#shadow)" />
+              <g class="cocoon-lines">
+                <path d="M410 325c52 36 101 38 145 11" />
+                <path d="M389 361c53 40 120 48 176 7" />
+                <path d="M379 405c55 41 143 53 198 5" />
+                <path d="M379 453c65 42 139 45 196 2" />
+                <path d="M394 500c58 38 116 35 167 2" />
+                <path d="M421 543c38 23 80 21 119 1" />
+                <path d="M420 302c-17 75-9 189 28 251" />
+                <path d="M471 283c-19 94-13 220 8 280" />
+                <path d="M524 298c18 80 14 191-8 256" />
+              </g>
+              <path class="spinning-thread" id="spinningThread" d="M594 360C680 330 682 427 612 448C542 469 529 391 599 385C663 379 683 484 591 512" />
+              <circle class="thread-tip" cx="591" cy="512" r="5" />
+            </g>
+
+            <g class="reel-scene" id="reelScene">
+              <path class="long-thread" id="longThread" d="M56 313C149 181 302 217 365 344C417 448 486 479 566 404C637 337 650 224 807 245" />
+              <g class="reel" transform="translate(608 360)">
+                <ellipse cx="0" cy="-124" rx="80" ry="27" />
+                <path d="M-80-124v248M80-124v248" />
+                <ellipse cx="0" cy="124" rx="80" ry="27" />
+                <ellipse class="reel-thread" cx="0" cy="0" rx="73" ry="102" fill="url(#cocoonGold)" />
+                <path class="reel-lines" d="M-72-71C-20-42 24-31 70-58M-75-33C-22-9 23-1 74-21M-75 8c53 19 100 21 149 3M-74 46c50 17 98 14 146-3M-66 80c47 12 87 6 130-8" />
+              </g>
+              <g class="hand hand-left">
+                <path d="M106 539c42-81 100-108 171-82l83 40c26 13 12 54-16 43l-79-30c-30 44-78 76-159 82v-53Z" />
+                <path d="M255 510c12-24 31-41 56-51" />
+              </g>
+            </g>
+
+            <g class="dye-scene" id="dyeScene">
+              <path class="dye-thread dye-a" d="M130 190C322 278 560 278 763 182" />
+              <path class="dye-thread dye-b" d="M121 246C335 326 560 326 778 232" />
+              <path class="dye-thread dye-c" d="M114 303C321 376 577 378 788 286" />
+              <path class="dye-thread dye-d" d="M108 360C319 431 583 429 798 341" />
+              <path class="dye-thread dye-e" d="M103 417C328 482 578 485 804 397" />
+              <g class="dye-bowl" filter="url(#shadow)">
+                <path d="M238 449h424c-11 137-80 205-212 205S249 586 238 449Z" fill="#D5C49B" />
+                <ellipse cx="450" cy="449" rx="212" ry="57" fill="#A83B3C" />
+                <ellipse cx="450" cy="442" rx="178" ry="38" fill="#D15A4F" />
+              </g>
+              <g class="drops">
+                <path d="M330 338c-16 25-24 39-24 52a24 24 0 0 0 48 0c0-13-8-27-24-52Z" />
+                <path d="M467 354c-13 20-19 31-19 42a19 19 0 0 0 38 0c0-11-6-22-19-42Z" />
+                <path d="M580 329c-18 28-27 44-27 58a27 27 0 0 0 54 0c0-14-9-30-27-58Z" />
+              </g>
+            </g>
+
+            <g class="loom-scene" id="loomScene">
+              <path class="loom-frame" d="M167 169h566v420H167zM124 637h652M202 589l-47 82M698 589l47 82" />
+              <g class="warp-lines">
+                <path d="M228 202v348M250 202v348M272 202v348M294 202v348M316 202v348M338 202v348M360 202v348M382 202v348M404 202v348M426 202v348M448 202v348M470 202v348M492 202v348M514 202v348M536 202v348M558 202v348M580 202v348M602 202v348M624 202v348M646 202v348M668 202v348" />
+              </g>
+              <g class="woven-lines">
+                <path d="M213 286h480M213 304h480M213 322h480M213 340h480M213 358h480M213 376h480M213 394h480M213 412h480M213 430h480M213 448h480M213 466h480M213 484h480M213 502h480M213 520h480M213 538h480" />
+              </g>
+              <g class="shuttle" id="shuttle">
+                <path d="M0 0c44-30 93-30 137 0c-44 30-93 30-137 0Z" fill="url(#cocoonGold)" />
+                <ellipse cx="68" cy="0" rx="28" ry="10" />
+              </g>
+            </g>
+
+            <g class="fabric-scene" id="fabricScene">
+              <path class="fabric-shadow" d="M230 246C395 206 560 210 722 250v302c-167-37-330-38-492 0V246Z" />
+              <path class="fabric" d="M230 246C395 206 560 210 722 250v302c-167-37-330-38-492 0V246Z" fill="url(#fabricGold)" />
+              <path class="fabric-weave" d="M230 246C395 206 560 210 722 250v302c-167-37-330-38-492 0V246Z" fill="url(#silkWeave)" />
+              <g clip-path="url(#fabricClip)" class="fabric-pattern">
+                <path d="M153 326c169-64 371-62 649 8M153 376c169-64 371-62 649 8M153 426c169-64 371-62 649 8M153 476c169-64 371-62 649 8" />
+                <path d="M281 170c-39 130-44 278-16 442M354 158c-39 130-44 278-16 442M427 153c-39 130-44 278-16 442M500 153c-39 130-44 278-16 442M573 160c-39 130-44 278-16 442M646 173c-39 130-44 278-16 442" />
+                <g class="fabric-flowers">
+                  <path d="M356 332c16-38 44-38 57 0c38-16 55 9 25 36c30 26 13 52-25 36c-13 38-41 38-57 0c-36 16-53-10-23-36c-30-27-13-52 23-36Z" />
+                  <path d="M544 417c16-38 44-38 57 0c38-16 55 9 25 36c30 26 13 52-25 36c-13 38-41 38-57 0c-36 16-53-10-23-36c-30-27-13-52 23-36Z" />
+                </g>
+              </g>
+              <path class="fabric-shine" d="M252 280C398 250 543 251 692 281" />
+            </g>
+
+            <g class="final-moth" transform="translate(730 185) scale(.32)">
+              <path class="final-wing left hind" d="M-8 8C-70 1-141 24-154 76C-121 112-55 94-7 32Z" />
+              <path class="final-wing left fore" d="M-5 8C-43-79-131-125-181-75C-183-16-104 37-7 30Z" />
+              <path class="final-wing right hind" d="M8 8C70 1 141 24 154 76C121 112 55 94 7 32Z" />
+              <path class="final-wing right fore" d="M5 8C43-79 131-125 181-75C183-16 104 37 7 30Z" />
+              <ellipse class="final-thorax" cx="0" cy="5" rx="23" ry="30" />
+              <path class="final-body" d="M0 24C16 39 12 88 0 108C-12 88-16 39 0 24Z" />
+              <circle class="final-head" cx="0" cy="-23" r="16" />
+              <path class="final-antenna" d="M-7-35C-24-74-65-83-81-59M7-35C24-74 65-83 81-59" />
+            </g>
+          </svg>
+
+          <div class="fact-card" id="factCard">
+            <span class="fact-index">01</span>
+            <p><strong>4–6 days</strong><span>life of a silk moth</span></p>
+          </div>
+        </div>
+
+        <div class="timeline" aria-hidden="true">
+          <span class="timeline-label">Moth</span>
+          <div class="timeline-track">
+            <i id="timelineProgress"></i>
+            <b class="timeline-dot dot-1"></b>
+            <b class="timeline-dot dot-2"></b>
+            <b class="timeline-dot dot-3"></b>
+            <b class="timeline-dot dot-4"></b>
+            <b class="timeline-dot dot-5"></b>
+            <b class="timeline-dot dot-6"></b>
+            <b class="timeline-dot dot-7"></b>
+            <b class="timeline-dot dot-8"></b>
+          </div>
+          <span class="timeline-label">Silk</span>
+        </div>
+
+        <div class="scroll-cue" id="scrollCue" aria-hidden="true">
+          <span>Continue the journey</span>
+          <i></i>
+        </div>
+
+        <button class="replay-button" id="replayButton" type="button">
+          <span>↻</span> Replay the journey
+        </button>
+      </div>
+
+      <div class="scroll-space" aria-hidden="true"></div>
+    </main>
+
+    <noscript>This animated story needs JavaScript enabled.</noscript>
+    <script src="script.js"></script>
+  </body>
+</html>
